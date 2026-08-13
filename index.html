@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tails & Tags - Premium Pet Shop and Accessories Store. Shop by pet type, explore featured brands, grooming services, store location and opening hours.">
+    <title>Tails & Tags | Premium Pet Shop</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/premium.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <style>
+        /* ===== Index premium overrides ===== */
+
+        /* Hero */
+        .hero-main {
+            position: relative;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(217, 183, 122, 0.22), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(63, 95, 74, 0.14), transparent 45%),
+                var(--bg-primary);
+            padding: calc(var(--spacing-xxl) * 1.1) 0 var(--spacing-xl) 0;
+            overflow: hidden;
+        }
+        .hero-main h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            line-height: 1.15;
+            margin: var(--spacing-md) 0;
+        }
+        .hero-main p { color: var(--text-secondary); max-width: 520px; line-height: 1.8; }
+        .hero-img-wrap { position: relative; }
+        .hero-img-wrap img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+            display: block;
+            box-shadow: 0 30px 70px rgba(20, 16, 12, 0.22);
+        }
+        .hero-chip {
+            position: absolute;
+            bottom: 22px;
+            left: -18px;
+            background: linear-gradient(135deg, #e8c98a, #b5955a);
+            color: #20150c;
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            box-shadow: 0 14px 34px rgba(217, 183, 122, 0.4);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Pet tiles */
+        .pet-tile {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+        .pet-tile:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(20, 16, 12, 0.15);
+            border-color: rgba(217, 183, 122, 0.6);
+        }
+        .pet-tile img {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto var(--spacing-md);
+            display: block;
+            border: 3px solid var(--clr-honey);
+            transition: transform var(--transition-normal);
+        }
+        .pet-tile:hover img { transform: scale(1.08) rotate(-5deg); }
+        .pet-tile h3 { margin-bottom: 6px; }
+        .pet-tile p { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: var(--spacing-md); }
+
+        /* Brand tiles */
+        .brand-tile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            transition: all var(--transition-normal);
+        }
+        .brand-tile i { color: var(--clr-honey); font-size: 1.2rem; }
+        .brand-tile:hover {
+            color: var(--clr-cocoa);
+            border-color: var(--clr-honey);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(20, 16, 12, 0.12);
+        }
+
+        /* Product cards */
+        .product-card { overflow: hidden; position: relative; }
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--transition-slow);
+        }
+        .product-card:hover img { transform: scale(1.06); }
+        .product-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 2;
+        }
+        .stars { color: var(--clr-honey); font-size: 0.8rem; margin-top: var(--spacing-sm); }
+
+        /* Info items */
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8c98a, #b5955a);
+            color: #20150c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 16px rgba(217, 183, 122, 0.35);
+        }
+        .hours-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        .hours-table td { padding: var(--spacing-sm) 0; border-bottom: 1px dashed var(--border-color); }
+        .hours-table td:last-child { text-align: right; font-weight: 600; color: var(--text-primary); }
+
+        /* Newsletter band */
+        .newsletter-lux {
+            background: linear-gradient(135deg, #14100c 0%, #2d4535 100%);
+            color: var(--clr-cream);
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter-lux::before {
+            content: '\f1b0';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: -40px;
+            bottom: -70px;
+            font-size: 15rem;
+            opacity: 0.06;
+            color: var(--clr-cream);
+        }
+        .newsletter-lux input[type="email"] {
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 248, 237, 0.25);
+            background: rgba(255, 248, 237, 0.08);
+            color: var(--clr-cream);
+            padding: 0.85rem 1.2rem;
+            flex-grow: 1;
+            outline: none;
+        }
+        .newsletter-lux input[type="email"]:focus { border-color: var(--clr-honey); }
+
+        @media (max-width: 768px) {
+            .hero-chip { left: 8px; bottom: 12px; }
+        }
+    </style>
+<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    
+    <!-- Section 1: Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="nav-logo hover-float" style="display: flex; align-items: center;">
+                <a href="index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+                    <i class="fa-solid fa-paw" style="font-size: 20px; color: var(--btn-primary-text); background: var(--btn-primary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;"></i>
+                    <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                        <span style="font-weight: 700; color: var(--text-primary); font-size: 1.2rem;">Tails & Tags</span>
+                        <span style="font-size: 0.8rem; font-weight: 400; color: var(--text-secondary);">Premium Pet Care</span>
+                    </div>
+                </a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link" style="color: var(--clr-coral);">Home</a></li>
+                <li><a href="pages/home-2.html" class="nav-link">Home 2</a></li>
+                <li><a href="pages/about.html" class="nav-link">About</a></li>
+                <li><a href="pages/services.html" class="nav-link">Services</a></li>
+                <li><a href="pages/blog.html" class="nav-link">Blog</a></li>
+                <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button id="theme-toggle" class="btn btn-outline" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                <button id="dir-toggle" class="btn btn-outline" aria-label="Toggle Direction">LTR</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Section 2: Hero -->
+        <section class="hero-main reveal">
+            <div class="container grid grid-cols-2 items-center gap-lg" style="align-items: center;">
+                <div>
+                    <span class="eyebrow">Premium Pet Care &bull; Est. 1987</span>
+                    <h1>Where Your Pets Are Treated <span class="gold-text">Like Family</span></h1>
+                    <p>Discover the finest selection of premium pet food, accessories, and grooming services — from dogs and cats to birds and fish. Combining playful character with sophisticated retail design.</p>
+                    <div class="flex gap-md" style="flex-wrap: wrap;">
+                        <a href="pages/services.html" class="btn-gold"><i class="fa-solid fa-gem"></i> View Services</a>
+                        <a href="#shop" class="btn-ghost-light" style="color: var(--clr-sage); border-color: var(--clr-sage);"><i class="fa-solid fa-bag-shopping"></i> Explore Products</a>
+                    </div>
+                </div>
+                <div class="hero-img-wrap img-frame">
+                    <img src="https://cdn.pixabay.com/photo/2018/10/01/09/21/pets-3715733_1280.jpg" alt="Happy pets">
+                    <div class="hero-chip"><i class="fa-solid fa-star"></i> Loved by 12,000+ Pet Families</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Quick Stats -->
+        <section class="section" style="padding: var(--spacing-lg) 0;">
+            <div class="container grid grid-cols-4 gap-md reveal-left" style="text-align: center;">
+                <div class="stat-lux" style="text-align: center;"><div class="num">12k+</div><div class="label">Happy Pets Served</div></div>
+                <div class="stat-lux" style="text-align: center;"><div class="num">350+</div><div class="label">Pet Products</div></div>
+                <div class="stat-lux" style="text-align: center;"><div class="num">40+</div><div class="label">Featured Brands</div></div>
+                <div class="stat-lux" style="text-align: center;"><div class="num">15+</div><div class="label">Years of Experience</div></div>
+            </div>
+        </section>
+
+        <!-- Section 4: Shop by Pet -->
+        <section id="shop" class="section" style="background-color: var(--bg-secondary);">
+            <div class="container reveal-left">
+                <div class="section-header">
+                    <span class="eyebrow" style="color: var(--clr-coral);">Shop by Pet</span>
+                    <h2 class="serif" style="font-weight: 600; font-size: clamp(1.9rem, 3vw, 2.6rem);">Find Everything For Your Furry Friend</h2>
+                    <p>Tailored collections for dogs, cats, birds, and fish — food, toys, accessories, and more.</p>
+                </div>
+                
+                <div class="grid grid-cols-4 gap-md">
+                    <div class="pet-tile">
+                        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=200" alt="Dogs">
+                        <h3>Dogs</h3>
+                        <p>Food, toys, leashes, and accessories for dogs of all sizes.</p>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <a href="pages/blog.html" class="btn btn-outline" style="margin-top: var(--spacing-sm);">Explore Dogs</a>
+                    </div>
+                    <div class="pet-tile">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=200" alt="Cats">
+                        <h3>Cats</h3>
+                        <p>Premium food, scratching posts, and toys for feline companions.</p>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <a href="pages/blog.html" class="btn btn-outline" style="margin-top: var(--spacing-sm);">Explore Cats</a>
+                    </div>
+                    <div class="pet-tile">
+                        <img src="https://cdn.pixabay.com/photo/2017/02/07/16/47/kingfisher-2046453_1280.jpg" alt="Birds">
+                        <h3>Birds</h3>
+                        <p>Cages, seeds, perches, and toys for happy, chirpy birds.</p>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <a href="pages/blog.html" class="btn btn-outline" style="margin-top: var(--spacing-sm);">Explore Birds</a>
+                    </div>
+                    <div class="pet-tile">
+                        <img src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&q=80&w=200" alt="Fish">
+                        <h3>Fish</h3>
+                        <p>Aquariums, food, filters, and aquatic accessories.</p>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <a href="pages/blog.html" class="btn btn-outline" style="margin-top: var(--spacing-sm);">Explore Fish</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Featured Brands -->
+        <section class="section">
+            <div class="container reveal-right">
+                <div class="section-header">
+                    <span class="eyebrow" style="color: var(--clr-coral);">Featured Brands</span>
+                    <h2 class="serif" style="font-weight: 600; font-size: clamp(1.9rem, 3vw, 2.6rem);">Trusted Brands We Carry</h2>
+                    <p>Premium, vet-recommended brands your pets know and love.</p>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-md">
+                    <div class="brand-tile"><i class="fa-solid fa-bowl-food"></i> Royal Canin</div>
+                    <div class="brand-tile"><i class="fa-solid fa-bone"></i> Pedigree</div>
+                    <div class="brand-tile"><i class="fa-solid fa-cat"></i> Whiskas</div>
+                    <div class="brand-tile"><i class="fa-solid fa-heart-pulse"></i> Hill's Science Diet</div>
+                    <div class="brand-tile"><i class="fa-solid fa-paw"></i> Purina Pro Plan</div>
+                    <div class="brand-tile"><i class="fa-solid fa-fish"></i> Aqua One</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Trending Products -->
+        <section class="section" style="background-color: var(--bg-secondary);">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="eyebrow" style="color: var(--clr-coral);">Bestsellers</span>
+                    <h2 class="serif" style="font-weight: 600; font-size: clamp(1.9rem, 3vw, 2.6rem);">Trending Products</h2>
+                    <p>Our most popular items loved by pets everywhere.</p>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-lg">
+                    <div class="card product-card">
+                        <span class="badge product-badge" style="background: var(--clr-honey); color: var(--clr-cocoa);">Bestseller</span>
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bone%20Dog%20Treats%20(51049786016).jpg?width=800" alt="Organic Dog Bone">
+                        <div class="card-body">
+                            <h3 style="margin: var(--spacing-sm) 0 0;">Organic Dog Bone</h3>
+                            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: var(--spacing-sm) 0 0;">All-natural, vet-approved chew for strong teeth.</p>
+                        </div>
+                    </div>
+                    <div class="card product-card">
+                        <span class="badge product-badge" style="background: var(--clr-sage); color: var(--clr-cream);">New</span>
+                        <img src="https://i.pinimg.com/736x/53/93/ee/5393eee9bda8c605722af37fe004e7d8.jpg" alt="Premium Cat Treat">
+                        <div class="card-body">
+                            <h3 style="margin: var(--spacing-sm) 0 0;">Premium Cat Treat</h3>
+                            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: var(--spacing-sm) 0 0;">Grain-free salmon bites your cat will beg for.</p>
+                        </div>
+                    </div>
+                    <div class="card product-card">
+                        <span class="badge product-badge" style="background: var(--clr-coral); color: var(--clr-cream);">Sale</span>
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Maltipoo%20dog%20running%20to%20return%20a%20tennis%20ball%20(12012).jpg?width=800" alt="Fetch Ball Pro">
+                        <div class="card-body">
+                            <h3 style="margin: var(--spacing-sm) 0 0;">Fetch Ball Pro</h3>
+                            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: var(--spacing-sm) 0 0;">Indestructible fetch ball with easy-grip texture.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Grooming Services -->
+        <section class="section section-lux">
+            <div class="container grid grid-cols-2 items-center gap-lg reveal" style="align-items: center;">
+                <div>
+                    <span class="eyebrow">Grooming Studio</span>
+                    <h2 class="serif" style="color: var(--clr-cream); font-weight: 600; font-size: clamp(1.9rem, 3vw, 2.6rem);">Professional Grooming Services</h2>
+                    <p style="color: var(--clr-mint);">Treat your pet to a spa day! Our experienced groomers provide top-notch care, ensuring your furry friend looks and feels their best.</p>
+                    <ul class="check-list" style="color: rgba(255, 248, 237, 0.85);">
+                        <li><i class="fa-solid fa-check"></i> Bath &amp; Brush</li>
+                        <li><i class="fa-solid fa-check"></i> Haircut &amp; Styling</li>
+                        <li><i class="fa-solid fa-check"></i> Nail Trimming</li>
+                        <li><i class="fa-solid fa-check"></i> Ear Cleaning &amp; De-shedding</li>
+                        <li><i class="fa-solid fa-check"></i> Flea &amp; Tick Treatment</li>
+                    </ul>
+                    <a href="pages/services.html" class="btn-gold"><i class="fa-solid fa-scissors"></i> View Pricing</a>
+                </div>
+                <div class="img-frame">
+                    <div class="card-img-wrapper" style="border-radius: var(--radius-lg); background: url('https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=600') center/cover; min-height: 380px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Store Location & Opening Hours -->
+        <section class="section">
+            <div class="container reveal-left">
+                <div class="section-header">
+                    <span class="eyebrow" style="color: var(--clr-coral);">Visit Us</span>
+                    <h2 class="serif" style="font-weight: 600; font-size: clamp(1.9rem, 3vw, 2.6rem);">Store Location &amp; Opening Hours</h2>
+                    <p>Come say hi — your pets are always welcome inside the store.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-lg" style="align-items: stretch;">
+                    <div class="card-lux" style="padding: var(--spacing-lg); position: relative; overflow: hidden; display: flex; flex-direction: column;">
+                        <div class="gold-line"></div>
+                        <div class="flex items-center" style="gap: var(--spacing-sm);">
+                            <div class="medallion" style="width: 50px; height: 50px; font-size: 1.15rem; margin: 0;"><i class="fa-solid fa-location-dot"></i></div>
+                            <div style="flex-grow: 1;">
+                                <h3 class="serif" style="font-weight: 600; font-size: 1.25rem; margin: 0;">Find Our Store</h3>
+                                <span class="eyebrow" style="font-size: 0.6rem; color: var(--clr-mint);">Visit the Atelier</span>
+                            </div>
+                            <span style="background: linear-gradient(135deg, #e8c98a, #b5955a); color: #20150c; font-size: 0.58rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill); white-space: nowrap;"><i class="fa-solid fa-circle" style="font-size: 0.4rem; margin-right: 4px;"></i>Open Today</span>
+                        </div>
+                        <div class="divider-gold" style="width: 56px; margin: var(--spacing-md) 0 0; justify-content: flex-start;"></div>
+                        <div style="margin-top: var(--spacing-sm);">
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                                <div>
+                                    <h5>Address</h5>
+                                    <p><strong>Tails &amp; Tags Flagship Store</strong><br>123 Pet Lane, Paws City, PC 90210</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <h5>Phone</h5>
+                                    <p><a href="tel:18007385683" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">1-800-PET-LOVE</a></p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <h5>Email</h5>
+                                    <p><a href="mailto:contact@tailsandtags.com" style="color: inherit; text-decoration: underline; text-underline-offset: 3px;">contact@tailsandtags.com</a></p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fa-solid fa-car"></i></div>
+                                <div>
+                                    <h5>Parking</h5>
+                                    <p>Free customer parking available at the back of the store.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="pages/contact.html" class="btn-gold" style="width: 100%; justify-content: center; margin-top: auto; display: flex;"><i class="fa-solid fa-location-arrow"></i> Get Directions</a>
+                    </div>
+                    <div class="card-lux" style="padding: var(--spacing-lg); position: relative; overflow: hidden;">
+                        <div class="gold-line"></div>
+                        <h3 class="serif" style="font-weight: 600; font-size: 1.3rem; margin: 0;">Opening Hours</h3>
+                        <div class="divider-gold" style="width: 56px; margin: var(--spacing-sm) 0 var(--spacing-md); justify-content: flex-start;"></div>
+                        <div>
+                            <div class="flex justify-between items-center" style="padding: 0.85rem 0; border-bottom: 1px solid rgba(217, 183, 122, 0.18);">
+                                <span style="font-weight: 600;">Monday &ndash; Friday</span>
+                                <span class="serif" style="color: var(--clr-honey); font-weight: 700;">9:00 AM &ndash; 8:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center" style="padding: 0.85rem 0; border-bottom: 1px solid rgba(217, 183, 122, 0.18);">
+                                <span style="font-weight: 600;">Saturday</span>
+                                <span class="serif" style="color: var(--clr-honey); font-weight: 700;">10:00 AM &ndash; 6:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center" style="padding: 0.85rem 0;">
+                                <span style="font-weight: 600;">Sunday</span>
+                                <span class="serif" style="color: var(--clr-honey); font-weight: 700;">10:00 AM &ndash; 6:00 PM</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px dashed rgba(217, 183, 122, 0.3);">
+                            <p style="margin: 0;"><i class="fa-solid fa-truck-fast" style="color: var(--clr-honey);"></i>  We also offer same-day home delivery within Paws City.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Newsletter -->
+        <section class="section text-center newsletter-lux">
+            <div class="container reveal">
+                <span class="eyebrow">The Private List</span>
+                <h2 class="serif gold-text" style="font-weight: 600; font-size: clamp(1.9rem, 3vw, 2.6rem);">Join the Tails &amp; Tags Family</h2>
+                <p style="color: var(--clr-mint); max-width: 520px; margin: var(--spacing-sm) auto var(--spacing-md) auto;">Subscribe to our newsletter for exclusive offers, pet care tips, and more.</p>
+                <form class="newsletter-form flex justify-center gap-sm" style="max-width: 520px; margin: 0 auto; margin-top: var(--spacing-md);">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-gold" style="border-radius: var(--radius-pill);"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-lux" style="background-color: #0d0b08; color: #a0a0a0; padding: 4rem 0 2rem 0; font-family: var(--font-body);">
+        <div class="container grid grid-cols-4 gap-lg" style="margin-bottom: 3rem; align-items: flex-start;">
+            <!-- Col 1 -->
+            <div>
+                <a href="index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 1.5rem;">
+                    <i class="fa-solid fa-paw" style="font-size: 20px; color: #20150c; background: linear-gradient(135deg, #e8c98a, #b5955a); border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0;"></i>
+                    <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                        <span style="font-weight: 700; color: #fff; font-size: 1.2rem;">Tails & Tags</span>
+                        <span style="font-size: 0.8rem; font-weight: 400; color: #a0a0a0;">Premium Pet Care</span>
+                    </div>
+                </a>
+                <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">London's most exclusive destination for premium pet care. A curated sanctuary where every pet receives extraordinary care.</p>
+                <div style="display: flex; gap: 0.8rem;">
+                    <a href="https://www.instagram.com/tailsandtags" target="_blank" rel="noopener" aria-label="fa-instagram" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #a0a0a0; text-decoration: none; transition: all 0.3s;"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/tailsandtags" target="_blank" rel="noopener" aria-label="fa-facebook-f" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #a0a0a0; text-decoration: none; transition: all 0.3s;"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://x.com/tailsandtags" target="_blank" rel="noopener" aria-label="fa-x-twitter" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #a0a0a0; text-decoration: none; transition: all 0.3s;"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.youtube.com/@tailsandtags" target="_blank" rel="noopener" aria-label="fa-youtube" style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: #a0a0a0; text-decoration: none; transition: all 0.3s;"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <!-- Col 2 -->
+            <div>
+                <h4 style="color: #fff; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;">Shop by Pet</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem;">
+                    <li><a href="#shop" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Dogs</a></li>
+                    <li><a href="#shop" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Cats</a></li>
+                    <li><a href="#shop" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Birds</a></li>
+                    <li><a href="#shop" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Fish</a></li>
+                    <li><a href="pages/services.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Grooming Services</a></li>
+                </ul>
+            </div>
+            
+            <!-- Col 3 -->
+            <div>
+                <h4 style="color: #fff; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;">Store</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem;">
+                    <li><a href="index.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Home</a></li>
+                    <li><a href="pages/home-2.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Home 2</a></li>
+                    <li><a href="pages/about.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">About</a></li>
+                    <li><a href="pages/services.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Services</a></li>
+                    <li><a href="pages/blog.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Blog</a></li>
+                    <li><a href="pages/contact.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Contact</a></li>
+                </ul>
+            </div>
+            
+            <!-- Col 4 -->
+            <div>
+                <h4 style="color: #fff; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;">The Private List</h4>
+                <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">Receive exclusive previews, special offers, and pet care insights before anyone else.</p>
+                <form class="newsletter-form" style="display: flex; gap: 0.5rem;">
+                    <input type="email" placeholder="Your email" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 0.8rem 1rem; border-radius: 4px; flex-grow: 1; outline: none;">
+                    <button type="submit" style="background: linear-gradient(135deg, #e8c98a, #b5955a); color: #20150c; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Join</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; position: relative;">
+            <div style="font-size: 0.8rem; color: #a0a0a0;">
+                &copy; 2026 Tails & Tags. All rights reserved. Established 1987, London.
+            </div>
+            <div style="display: flex; gap: 1.5rem; padding-right: 3rem;">
+                <a href="pages/privacy-policy.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.8rem;">Privacy Policy</a>
+                <a href="pages/terms.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.8rem;">Terms & Conditions</a>
+                <a href="pages/sitemap.html" style="color: #a0a0a0; text-decoration: none; font-size: 0.8rem;">Sitemap</a>
+            </div>
+            
+            <a href="#" style="position: absolute; right: 0; bottom: 0; width: 40px; height: 40px; background: linear-gradient(135deg, #e8c98a, #b5955a); color: #20150c; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;"><i class="fa-solid fa-chevron-up"></i></a>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/forms.js"></script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* ============================================================
+   Tails & Tags — Global Responsive Layer
+   Viewport breakpoints: 1024 / 768 / 640 / 480 / 425 / 375 / 360 / 320
+   Loaded LAST (after premium.css and any page <style> blocks)
+   so it can refine every section on every page.
+   ============================================================ */
+
+/* ---------- Hamburger (mobile menu) ---------- */
+.nav-toggle {
+  display: none;
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+}
+
+/* Uniform compact icon buttons in the navbar (theme, LTR, hamburger) */
+.nav-actions .btn:not(.btn-primary), .nav-toggle {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  flex-shrink: 0;
+}
+#dir-toggle { font-size: 0.68rem; letter-spacing: 1px; }
+
+/* Desktop-only Book Now CTA at the navbar's right edge */
+.nav-book { display: none; }
+@media (min-width: 1025px) {
+  .nav-book {
+    display: inline-flex;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+  }
+}
+
+.nav-toggle .fa-xmark { display: none; }
+.navbar.nav-open .nav-toggle .fa-bars { display: none; }
+.navbar.nav-open .nav-toggle .fa-xmark { display: inline; }
+
+/* ---------- ≤1024px : small laptop / landscape tablet ---------- */
+@media (max-width: 1024px) {
+  .nav-container { gap: var(--spacing-md); }
+  .nav-links { gap: var(--spacing-md); }
+
+  /* Mobile drawer (activated by .js-nav class added in navigation.js) */
+  .js-nav .nav-toggle { display: inline-flex; }
+  .js-nav .nav-container { flex-wrap: nowrap; }
+  .js-nav .nav-links {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid rgba(217, 183, 122, 0.25);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+    padding: 0 var(--spacing-lg);
+    height: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: height var(--transition-normal), opacity var(--transition-normal), padding var(--transition-normal);
+  }
+  .js-nav .navbar.nav-open .nav-links {
+    height: calc(100vh - 100%);
+    height: calc(100dvh - 100%);
+    max-height: none;
+    overflow-y: auto;
+    opacity: 1;
+    visibility: visible;
+    padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-md);
+  }
+  .js-nav .nav-links li { width: 100%; }
+  .js-nav .nav-link {
+    display: block;
+    padding: 0.85rem 0.25rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(217, 183, 122, 0.12);
+  }
+  .js-nav .nav-links li:last-child .nav-link { border-bottom: none; }
+  .nav-lux .nav-links {
+    background: rgba(20, 16, 12, 0.97);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* ---------- ≤768px : portrait tablet ---------- */
+@media (max-width: 768px) {
+  .section { padding: 3rem 0; }
+  .section-lux { padding: 3rem 0; }
+
+  .hero-main { padding-top: 7rem; padding-bottom: 3.5rem; }
+  .hero-lux { padding-top: 7rem; padding-bottom: 3.5rem; }
+  .hero-lux .lead { font-size: 1.1rem; }
+
+  .stat-lux .num { font-size: 2.1rem; }
+
+  /* Keep footers and stat/tile rows in 2 columns on tablets */
+  .footer-lux .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-4:has(.stat-lux) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-4:has(.pet-tile) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-4:has(.team-card) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .footer-lux { padding: 3rem 0 1.5rem; }
+  .hours-table { font-size: 0.88rem; }
+
+  /* Editor's Picks product cards stay 2-up on tablets */
+  .picks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- ≤640px : large phone ---------- */
+@media (max-width: 640px) {
+  /* Nav: logo row, then links, then actions, stacked full width */
+  .nav-links { gap: var(--spacing-sm) var(--spacing-md); }
+  .nav-actions .btn { padding: 0.6rem 1rem; font-size: 0.85rem; }
+
+  .btn-gold, .btn-ghost-light { padding: 0.8rem 1.4rem; font-size: 0.88rem; }
+
+  /* Tall inline hero paddings (services/blog) collapse on phones */
+  section[style*="padding: calc(var(--spacing-xxl)"] { padding-top: 6.5rem !important; padding-bottom: 3.5rem !important; }
+  section[style*="padding: calc(var(--spacing-xl) * 2)"] { padding-top: 4rem !important; padding-bottom: 3rem !important; }
+
+  .hero-main h1 { font-size: 2.5rem; }
+  .hero-lux h1 { font-size: 2.9rem; }
+  .signature-main { min-height: 320px; }
+
+  .play-btn { width: 64px; height: 64px; font-size: 1.4rem; box-shadow: 0 0 0 8px rgba(217, 183, 122, 0.18), 0 14px 30px rgba(0, 0, 0, 0.45); }
+
+  /* Newsletter forms stack into a single column */
+  .newsletter-form, .newsletter-lux form { flex-direction: column; align-items: stretch; }
+  .newsletter-form input[type="email"], .newsletter-lux input[type="email"] { width: 100%; text-align: center; }
+  .newsletter-form button { width: 100%; justify-content: center; }
+
+  .footer-lux .grid-cols-4 { gap: var(--spacing-lg) var(--spacing-md); }
+}
+
+/* ---------- ≤480px : small phone ---------- */
+@media (max-width: 480px) {
+  .section { padding: 2.5rem 0; }
+  .hero-main { padding-top: 6rem; padding-bottom: 2.75rem; }
+  .hero-lux { padding-top: 6rem; padding-bottom: 2.75rem; }
+  .hero-stats { margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); gap: var(--spacing-md); }
+
+  .stat-lux .num { font-size: 1.8rem; }
+  .stat-lux .label { font-size: 0.66rem; letter-spacing: 1.5px; }
+
+  .marquee-item { font-size: 0.85rem; gap: 2.5rem; }
+  .marquee-track { gap: 2.5rem; }
+
+  .eyebrow { font-size: 0.68rem; letter-spacing: 3px; }
+
+  .card-body { padding: var(--spacing-md) var(--spacing-sm); }
+  .card-lux { padding: var(--spacing-md); }
+
+  .footer-lux .grid-cols-4 { grid-template-columns: 1fr; }
+  .footer-lux { padding: 2.5rem 0 1.25rem; }
+  
+  /* Fix bottom footer row wrapping */
+  .footer-lux > .container:last-child {
+    flex-direction: column;
+    align-items: center !important;
+    gap: 1.5rem;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  .footer-lux > .container:last-child > div:nth-child(2) {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0 !important;
+  }
+
+  .picks-grid { grid-template-columns: 1fr; }
+
+  .hours-table { font-size: 0.82rem; }
+  .hours-table td { padding: 0.4rem 0; }
+
+  .product-card img { height: 180px !important; }
+  .pet-tile { padding: var(--spacing-md); }
+  .pet-tile img { width: 76px; height: 76px; }
+  .hero-chip { left: 8px; right: 8px; bottom: 10px; padding: 8px 12px; font-size: 0.72rem; }
+
+  .suite-premium, .quote-premium { padding: var(--spacing-lg) var(--spacing-md); }
+  .award-lux { font-size: 1rem; }
+  .signature-badge { font-size: 1.1rem; padding: 7px 12px; }
+  .signature-sub { width: 85%; }
+  .signature-sub img { height: 140px; }
+
+  .orb-1 { width: 200px; height: 200px; }
+  .orb-2 { width: 150px; height: 150px; }
+  .lux-orb { width: 220px; height: 220px; }
+
+  .blog-page .card-img-wrapper { height: 180px !important; }
+  #a-img { height: 260px !important; }
+
+  .info-card { padding: var(--spacing-md); }
+  .form-card { padding: 0.875rem; }
+  .map-card iframe { min-height: 280px; }
+  .hero-badge { left: 8px; right: 8px; bottom: 8px; padding: 10px 12px; font-size: 0.82rem; }
+
+  /* Hero button stacks */
+  .hero-main .flex, .hero-lux .flex, .hero-about .flex, .section-lux .flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-main .flex a, .hero-lux .flex a, .hero-about .flex a, .section-lux .flex a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 404 action buttons */
+  .text-center .container > .btn-gold, .text-center .container > .btn { width: 100%; justify-content: center; }
+  .text-center .container > .btn-outline { margin-left: 0 !important; margin-top: var(--spacing-sm); }
+}
+
+/* ---------- ≤425px : compact phone ---------- */
+@media (max-width: 425px) {
+  .nav-link { font-size: 0.88rem; }
+  .grid-cols-4:has(.pet-tile), .grid-cols-4:has(.team-card) { grid-template-columns: 1fr; }
+  .divider-gold::before, .divider-gold::after { width: 44px; }
+  .hours-row { font-size: 0.85rem; }
+  .faq-item summary { font-size: 0.92rem; }
+
+  /* Decrease navbar contents size */
+  .nav-logo a { gap: 6px !important; }
+  .nav-logo i { width: 32px !important; height: 32px !important; font-size: 14px !important; }
+  .nav-logo span:first-child { font-size: 1.05rem !important; }
+  .nav-logo span:last-child { font-size: 0.68rem !important; }
+  
+  .nav-actions .btn { padding: 0.5rem 0.7rem; font-size: 0.8rem; }
+  
+  /* Reduce size of circle icons (Theme, LTR) and hamburger to free up edge gap */
+  .nav-actions .btn:not(.btn-primary), .nav-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 0.75rem !important;
+  }
+  
+  /* Ensure padding on the edges */
+  .nav-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* ---------- ≤375px : small phone ---------- */
+@media (max-width: 375px) {
+  .container { padding: 0 0.875rem; }
+  .hero-main h1 { font-size: 2.2rem; }
+  .hero-lux h1 { font-size: 2.5rem; }
+  .hero-lux .lead { font-size: 1rem; }
+
+  .nav-actions { gap: var(--spacing-sm); }
+  .nav-logo span:first-child { font-size: 0.95rem !important; }
+  .nav-logo span:last-child { font-size: 0.62rem !important; }
+
+  .medallion { width: 64px; height: 64px; font-size: 1.5rem; }
+  .btn-gold, .btn-ghost-light { padding: 0.7rem 1.2rem; font-size: 0.82rem; letter-spacing: 1px; }
+  .signature-sub img { height: 120px; }
+  .signature-badge { font-size: 1rem; }
+}
+
+/* ---------- ≤360px : narrow phone ---------- */
+@media (max-width: 360px) {
+  .nav-container { gap: var(--spacing-xs); }
+  .nav-actions { gap: var(--spacing-xs); }
+  .nav-actions .btn { padding: 0.45rem 0.6rem; font-size: 0.75rem; }
+  
+  .hero-chip { font-size: 0.68rem; }
+  .marquee-item { font-size: 0.8rem; }
+  .eyebrow { font-size: 0.65rem; letter-spacing: 2px; }
+  .stat-lux .num { font-size: 1.6rem; }
+  .footer-lux .grid-cols-4 { gap: var(--spacing-lg); }
+  .play-btn { width: 56px; height: 56px; font-size: 1.2rem; }
+}
+
+/* ---------- ≤320px : smallest viewport ---------- */
+@media (max-width: 320px) {
+  .hero-main h1 { font-size: 2rem; }
+  .hero-lux h1 { font-size: 2.2rem; }
+  .nav-logo span:last-child { font-size: 0.58rem !important; }
+  .medallion { width: 56px; height: 56px; font-size: 1.3rem; }
+  .suite-premium, .quote-premium { padding: var(--spacing-md) var(--spacing-sm); }
+  .award-lux { font-size: 0.9rem; padding: var(--spacing-sm); }
+  .info-item { gap: var(--spacing-sm); }
+  .info-icon { width: 40px; height: 40px; font-size: 0.95rem; }
+  .hours-table { font-size: 0.78rem; }
+}
