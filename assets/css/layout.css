@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 1.5rem;
 }
 
 .section {
@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 0 !important;
+  padding: 1.25rem 1.5rem !important;
 }
 
 .nav-logo {

@@ -47,8 +47,20 @@
   color: var(--btn-primary-text);
 }
 
+/* Pagination page indicators (consistent circular tabs) */
+.page-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  line-height: 1;
+}
+
 /* Cards */
 .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background-color: var(--bg-secondary);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -66,6 +78,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 4/3;
+  flex-shrink: 0;
 }
 
 .card-img {
@@ -80,11 +93,22 @@
 }
 
 .card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: var(--spacing-md);
+}
+
+.card-body > .link-gold,
+.card-body > .btn,
+.card-body > a:last-child {
+  margin-top: auto;
+  padding-top: var(--spacing-xs);
 }
 
 .badge {
   display: inline-block;
+  align-self: flex-start;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius-pill);
   font-size: 0.75rem;

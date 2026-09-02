@@ -38,7 +38,8 @@
 
 /* ---------- ≤1024px : small laptop / landscape tablet ---------- */
 @media (max-width: 1024px) {
-  .nav-container { gap: var(--spacing-md); }
+  .nav-container { padding: 1.1rem 1.5rem !important; gap: var(--spacing-md); }
+  .container { padding: 0 1.5rem; }
   .nav-links { gap: var(--spacing-md); }
 
   /* Mobile drawer (activated by .js-nav class added in navigation.js) */
@@ -84,10 +85,23 @@
     background: rgba(20, 16, 12, 0.97);
     backdrop-filter: blur(12px);
   }
+
+  /* Grooming Studio & img-frame adjustments at 1024px */
+  .grooming-img-wrap {
+    width: calc(100% - 24px);
+    max-width: 100%;
+    margin: 12px auto;
+  }
+  .grooming-img {
+    height: 350px;
+    object-position: 85% 35%;
+  }
 }
 
 /* ---------- ≤768px : portrait tablet ---------- */
 @media (max-width: 768px) {
+  .nav-container { padding: 0.9rem 1.5rem !important; }
+  .container { padding: 0 1.5rem; }
   .section { padding: 3rem 0; }
   .section-lux { padding: 3rem 0; }
 
@@ -108,6 +122,17 @@
 
   /* Editor's Picks product cards stay 2-up on tablets */
   .picks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* Grooming image centered and properly framed on tablet/mobile */
+  .grooming-img-wrap {
+    width: calc(100% - 24px);
+    max-width: 500px;
+    margin: 2rem auto 0;
+  }
+  .grooming-img {
+    height: 300px;
+    object-position: 85% 30%;
+  }
 }
 
 /* ---------- ≤640px : large phone ---------- */
@@ -124,7 +149,7 @@
 
   .hero-main h1 { font-size: 2.5rem; }
   .hero-lux h1 { font-size: 2.9rem; }
-  .signature-main { min-height: 320px; }
+  .signature-main { height: 280px; }
 
   .play-btn { width: 64px; height: 64px; font-size: 1.4rem; box-shadow: 0 0 0 8px rgba(217, 183, 122, 0.18), 0 14px 30px rgba(0, 0, 0, 0.45); }
 
@@ -138,6 +163,8 @@
 
 /* ---------- ≤480px : small phone ---------- */
 @media (max-width: 480px) {
+  .nav-container { padding: 0.75rem 1.25rem !important; }
+  .container { padding: 0 1.25rem; }
   .section { padding: 2.5rem 0; }
   .hero-main { padding-top: 6rem; padding-bottom: 2.75rem; }
   .hero-lux { padding-top: 6rem; padding-bottom: 2.75rem; }
@@ -183,9 +210,11 @@
 
   .suite-premium, .quote-premium { padding: var(--spacing-lg) var(--spacing-md); }
   .award-lux { font-size: 1rem; }
-  .signature-badge { font-size: 1.1rem; padding: 7px 12px; }
-  .signature-sub { width: 85%; }
-  .signature-sub img { height: 140px; }
+  .signature-frame { width: calc(100% - 16px); max-width: 100%; margin: 0 auto 2.75rem; }
+  .signature-main { height: 250px; }
+  .signature-sub { position: absolute; bottom: -24px; right: -8px; width: 52%; max-width: 190px; border-width: 3px; z-index: 4; }
+  .signature-sub img { height: 125px; object-fit: cover; object-position: 85% 30%; }
+  .signature-badge { font-size: 1.05rem; padding: 6px 12px; top: 10px; left: -8px; }
 
   .orb-1 { width: 200px; height: 200px; }
   .orb-2 { width: 150px; height: 150px; }
@@ -212,6 +241,21 @@
   /* 404 action buttons */
   .text-center .container > .btn-gold, .text-center .container > .btn { width: 100%; justify-content: center; }
   .text-center .container > .btn-outline { margin-left: 0 !important; margin-top: var(--spacing-sm); }
+
+  /* Corner accents & grooming image for small phones */
+  .img-frame::before, .img-frame::after { width: 40px; height: 40px; }
+  .img-frame::before { top: -8px; left: -8px; }
+  .img-frame::after { bottom: -8px; right: -8px; }
+
+  .grooming-img-wrap {
+    width: calc(100% - 20px);
+    max-width: 100%;
+    margin: 1.25rem auto 0;
+  }
+  .grooming-img {
+    height: 240px;
+    object-position: 85% 30%;
+  }
 }
 
 /* ---------- ≤425px : compact phone ---------- */
@@ -239,14 +283,17 @@
   
   /* Ensure padding on the edges */
   .nav-container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding: 0.7rem 1.15rem !important;
+  }
+  .container {
+    padding: 0 1.15rem;
   }
 }
 
 /* ---------- ≤375px : small phone ---------- */
 @media (max-width: 375px) {
-  .container { padding: 0 0.875rem; }
+  .nav-container { padding: 0.65rem 1rem !important; }
+  .container { padding: 0 1rem; }
   .hero-main h1 { font-size: 2.2rem; }
   .hero-lux h1 { font-size: 2.5rem; }
   .hero-lux .lead { font-size: 1rem; }
@@ -257,13 +304,15 @@
 
   .medallion { width: 64px; height: 64px; font-size: 1.5rem; }
   .btn-gold, .btn-ghost-light { padding: 0.7rem 1.2rem; font-size: 0.82rem; letter-spacing: 1px; }
-  .signature-sub img { height: 120px; }
-  .signature-badge { font-size: 1rem; }
+  .signature-sub { width: 54%; max-width: 175px; }
+  .signature-sub img { height: 115px; }
+  .signature-badge { font-size: 0.95rem; }
 }
 
 /* ---------- ≤360px : narrow phone ---------- */
 @media (max-width: 360px) {
-  .nav-container { gap: var(--spacing-xs); }
+  .nav-container { padding: 0.6rem 0.875rem !important; gap: var(--spacing-xs); }
+  .container { padding: 0 0.875rem; }
   .nav-actions { gap: var(--spacing-xs); }
   .nav-actions .btn { padding: 0.45rem 0.6rem; font-size: 0.75rem; }
   
@@ -273,6 +322,24 @@
   .stat-lux .num { font-size: 1.6rem; }
   .footer-lux .grid-cols-4 { gap: var(--spacing-lg); }
   .play-btn { width: 56px; height: 56px; font-size: 1.2rem; }
+
+  .signature-main { height: 215px; }
+  .signature-sub { bottom: -18px; right: -6px; width: 54%; max-width: 160px; }
+  .signature-sub img { height: 105px; }
+  .signature-badge { font-size: 0.9rem; padding: 5px 10px; }
+
+  .img-frame::before, .img-frame::after { width: 32px; height: 32px; }
+  .img-frame::before { top: -6px; left: -6px; }
+  .img-frame::after { bottom: -6px; right: -6px; }
+
+  .grooming-img-wrap {
+    width: calc(100% - 16px);
+    margin: 1rem auto 0;
+  }
+  .grooming-img {
+    height: 210px;
+    object-position: 85% 30%;
+  }
 }
 
 /* ---------- ≤320px : smallest viewport ---------- */
@@ -286,4 +353,11 @@
   .info-item { gap: var(--spacing-sm); }
   .info-icon { width: 40px; height: 40px; font-size: 0.95rem; }
   .hours-table { font-size: 0.78rem; }
+
+  .signature-main { height: 190px; }
+  .signature-sub { bottom: -16px; right: -4px; width: 55%; }
+  .signature-sub img { height: 95px; }
+
+  .grooming-img-wrap { width: calc(100% - 14px); }
+  .grooming-img { height: 185px; }
 }

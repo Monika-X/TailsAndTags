@@ -21,7 +21,17 @@
   --btn-secondary-bg: var(--clr-coral);
   --btn-secondary-text: var(--clr-cream);
   --btn-secondary-hover: #c4695c;
-  
+
+  /* Footer (Light Theme) */
+  --footer-bg: var(--clr-sage);
+  --footer-text: rgba(255, 248, 237, 0.75);
+  --footer-heading: var(--clr-cream);
+  --footer-border: rgba(255, 248, 237, 0.15);
+  --footer-social-border: rgba(255, 248, 237, 0.25);
+  --footer-input-bg: rgba(255, 248, 237, 0.1);
+  --footer-input-border: rgba(255, 248, 237, 0.2);
+  --footer-input-text: var(--clr-cream);
+
   /* Typography */
   --font-heading: 'Quicksand', sans-serif;
   --font-body: 'DM Sans', sans-serif;
@@ -65,4 +75,14 @@
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+
+  /* Footer (Dark Theme) */
+  --footer-bg: #0d0b08;
+  --footer-text: #a0a0a0;
+  --footer-heading: #ffffff;
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --footer-social-border: rgba(255, 255, 255, 0.2);
+  --footer-input-bg: rgba(255, 255, 255, 0.05);
+  --footer-input-border: rgba(255, 255, 255, 0.1);
+  --footer-input-text: #ffffff;
 }
