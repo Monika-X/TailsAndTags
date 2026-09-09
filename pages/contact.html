@@ -17,7 +17,7 @@
             position: relative;
             background: linear-gradient(135deg, #2d4535 0%, var(--clr-sage) 55%, #4a6a55 100%);
             color: var(--clr-cream);
-            padding: calc(var(--spacing-xl) * 1.25) 0;
+            padding: calc(var(--spacing-xxl) * 1.4) 0 var(--spacing-xl) 0;
             overflow: hidden;
         }
         .contact-hero::before {
@@ -325,7 +325,7 @@
         }
 
         @media (max-width: 768px) {
-            .contact-hero { padding: var(--spacing-xl) 0; }
+            .contact-hero { padding: calc(var(--spacing-xxl) * 0.9) 0 var(--spacing-xl) 0; }
             .hero-grid { grid-template-columns: 1fr; }
             .hero-actions .btn { flex: 1; justify-content: center; }
             .info-grid { grid-template-columns: 1fr; }
@@ -519,7 +519,7 @@
         <section class="section" style="background-color: var(--bg-tertiary);">
             <div class="container reveal">
                 <div class="section-header">
-                    <span class="eyebrow">Good To Know</span>
+                    <span class="eyebrow" style="color: var(--text-primary);">Good To Know</span>
                     <h2 class="serif" style="font-weight: 600;">Frequently Asked Questions</h2>
                     <p style="color: var(--text-secondary);">Quick answers to the questions we hear most.</p>
                 </div>
